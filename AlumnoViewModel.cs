@@ -31,6 +31,8 @@ namespace UD05_AlumnosApp.ViewModels
         public RelayCommand DeleteCommand { get; }
         public RelayCommand EditCommand { get; }
 
+        public RelayCommand CancelCommand { get; }
+
         #region Propiedades nuevo alumno
 
         private string _nombre;
@@ -40,7 +42,7 @@ namespace UD05_AlumnosApp.ViewModels
             set
             {
                 _nombre = value;
-                OnPropertyChanged(nameof(Nombre));
+               OnPropertyChanged(nameof(Nombre));
             }
         }
 
@@ -82,6 +84,7 @@ namespace UD05_AlumnosApp.ViewModels
                     Nombre = _selectedAlumno.Nombre;
                     Apellido = _selectedAlumno.Apellido;
                     Curso = _selectedAlumno.Curso;
+
                 }
             }
         }
@@ -106,7 +109,12 @@ namespace UD05_AlumnosApp.ViewModels
             EditCommand = new RelayCommand(
               execute: _ => EditAlumno(),
               canExecute: _ => SelectedAlumno != null
-          );
+            );
+
+            CancelCommand = new RelayCommand(
+                execute: _ => LimpiarFormulario(),
+                canExecute => SelectedAlumno != null
+            );
 
             LoadData();
         }
@@ -169,5 +177,6 @@ namespace UD05_AlumnosApp.ViewModels
             Curso = null;
             SelectedAlumno = null;
         }
+
     }
 }

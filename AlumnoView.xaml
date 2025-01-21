@@ -35,6 +35,7 @@
                     <TextBlock>Curso:</TextBlock>
                     <TextBox  Text="{Binding Curso}" ></TextBox>
                     <Button Content="Añadir alumno" Command="{Binding AddCommand}"  Margin="10"></Button>
+                    <Button Content="Cancelar" Command="{Binding CancelCommand}"  Margin="10"></Button>
                 </StackPanel>
             </Border>
             
@@ -44,15 +45,19 @@
                            FontWeight="Bold"></TextBlock>
                 <DataGrid x:Name="lvAlumnos" AutoGenerateColumns="False" 
                           ItemsSource="{Binding Alumnos}" 
-                          SelectedItem="{Binding SelectedAlumno}" 
+                          SelectedItem="{Binding SelectedAlumno, Mode=TwoWay}"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
-                          ColumnWidth="*">  
+                          ColumnWidth="*"
+                            IsReadOnly="True"
+    CanUserAddRows="False"
+    CanUserDeleteRows="False">  
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                             <Setter Property="VerticalContentAlignment" Value="Center" />
                         </Style>
+                        
                     </DataGrid.CellStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"></DataGridTextColumn>
